@@ -66,51 +66,53 @@ public:
 	{
 		for (int i = 0; i < 10; i++)
 		{
+			if(_name[i]!='\0')
 			name[i] = _name[i];
+			else break;
 		};
 		cnt++;
 	}
 	student(char _name[10], char _birthday[8]) :student(_name)
 	{
 		for (int i = 0; i < 8; i++)
-		{
+		{  
+			if (_birthday[i] != '\0')
 			birthday[i] = _birthday[i];
+			else break;
 		};
 	}
 	student(char _name[10], char _birthday[8], char _city[15]) :student(_name,_birthday)
 	{
 		for (int i = 0; i < 15; i++)
 		{
+			if (_city[i] != '\0')
 			city[i] = _city[i];
+			else break;
 		};
 	}
 
 	~student() {
-		delete[] name;
-		delete[] birthday;
 		delete[] city;
-
 	}
-	char getName() {
-		return name[10];
+	char * getName() {
+		return name;
 	}
 	char getCnt() {
 		return student::cnt;
 	}
 };
+int student::cnt = 0;
 
 class SingleTon {
 public:
 	int x;
 	static SingleTon & getInstance() {
-	static	SingleTon instanse;
+	static SingleTon instanse;
 	return instanse;
 	}
 private:
 	SingleTon() {
-
 	}
-
 };
 
 class Point
@@ -121,14 +123,14 @@ public:
 	int getX() {
 		return x;
 	}
-	void setX(int _x) {
-		x = _x;
+	void setX(int x) {
+		this->x = x;
 	}
 	int getY() {
 		return y;
 	}
-	void setY(int _y) {
-		y = _y;
+	void setY(int y) {
+		(*this).y = y;
 	}
 	int getZ() {
 		return z;
@@ -198,8 +200,8 @@ public:
 };
 void sample() {
 	student a("Sed");
-	student b("Ded","01012000");
-	student c("Ded", "01012000","RIM");
+	student b("Ded", "01012000");
+	//student c("Ded", "01012000","RIM");
 	cout << a.getName() << " " << b.getName() << endl;
 }
 
@@ -211,8 +213,21 @@ void sample_car() {
 
 int main()
 {
-	//sample_car();
-	sample();
+	//student s, s1("Sed"), s2("DED", "0101201");
+	//cout << student::cnt;
+	//sample();
+	SingleTon &a = SingleTon::getInstance();
+	a.x = 5;
+	SingleTon &b = SingleTon::getInstance();
+	b.x = 10;
+	SingleTon &c = SingleTon::getInstance();
+	c.x = 7;
+	a.x = c.x;
+	cout << SingleTon::getInstance().x;
+	 
+	
+	
+
 	system("pause");
 	return 0;
 }
