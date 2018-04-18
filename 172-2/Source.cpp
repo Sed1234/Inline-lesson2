@@ -103,6 +103,34 @@ public:
 };
 int student::cnt = 0;
 
+class Vector {
+public:
+	int *a;
+	int size;
+	Vector(int n) {
+		size = n;
+		a = new int[size];
+		for (int i = 0; i < size; i++)
+		{
+		a[i] = i;
+		}
+		cout << "Vector created" << endl;
+	}
+	Vector(const Vector & another) {
+		this->size = another.size;
+		this->a = new int[this->size];
+		for (int i = 0; i < this->size; i++)
+		{
+			this->a[i] = another.a[i];
+		}
+		cout << "Vector created" << endl;
+	}
+	~Vector() {
+		cout << "Vector deleted" << endl;
+		 delete[] a;
+	}
+};
+
 class SingleTon {
 public:
 	int x;
@@ -210,21 +238,25 @@ void sample_car() {
 	Car b('1');
 	cout << a.getValue() << " " << b.getValue() << endl;
 }
-
+void getVector() {
+	Vector s(10);
+	Vector s1(s);
+}
 int main()
 {
 	//student s, s1("Sed"), s2("DED", "0101201");
 	//cout << student::cnt;
 	//sample();
-	SingleTon &a = SingleTon::getInstance();
+	/*SingleTon &a = SingleTon::getInstance();
 	a.x = 5;
 	SingleTon &b = SingleTon::getInstance();
 	b.x = 10;
 	SingleTon &c = SingleTon::getInstance();
 	c.x = 7;
 	a.x = c.x;
-	cout << SingleTon::getInstance().x;
-	 
+	cout << SingleTon::getInstance().x;*/
+	getVector();
+
 	
 	
 
